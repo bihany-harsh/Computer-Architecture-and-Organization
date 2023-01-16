@@ -1,0 +1,41 @@
+#! /usr/bin/vvp
+:ivl_version "10.3 (stable)";
+:ivl_delay_selection "TYPICAL";
+:vpi_time_precision - 9;
+:vpi_module "system";
+:vpi_module "vhdl_sys";
+:vpi_module "v2005_math";
+:vpi_module "va_math";
+S_0x55eb3720e590 .scope module, "hello_tb" "hello_tb" 2 4;
+ .timescale -9 -9;
+v0x55eb3721d7a0_0 .var "A", 0 0;
+v0x55eb3721d840_0 .net "B", 0 0, L_0x55eb3721d910;  1 drivers
+S_0x55eb3720e710 .scope module, "uut" "hello" 2 9, 3 1 0, S_0x55eb3720e590;
+ .timescale -9 -9;
+    .port_info 0 /INPUT 1 "A"
+    .port_info 1 /OUTPUT 1 "B"
+L_0x55eb3721d910 .functor BUFZ 1, v0x55eb3721d7a0_0, C4<0>, C4<0>, C4<0>;
+v0x55eb371d90e0_0 .net "A", 0 0, v0x55eb3721d7a0_0;  1 drivers
+v0x55eb3721d680_0 .net "B", 0 0, L_0x55eb3721d910;  alias, 1 drivers
+    .scope S_0x55eb3720e590;
+T_0 ;
+    %vpi_call 2 12 "$dumpfile", "hello_tb.vcd" {0 0 0};
+    %vpi_call 2 13 "$dumpvars", 32'sb00000000000000000000000000000000, S_0x55eb3720e590 {0 0 0};
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55eb3721d7a0_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 1, 0, 1;
+    %store/vec4 v0x55eb3721d7a0_0, 0, 1;
+    %delay 10, 0;
+    %pushi/vec4 0, 0, 1;
+    %store/vec4 v0x55eb3721d7a0_0, 0, 1;
+    %delay 10, 0;
+    %vpi_call 2 21 "$display", "Test complete" {0 0 0};
+    %end;
+    .thread T_0;
+# The file index is used to find the file name in the following table.
+:file_names 4;
+    "N/A";
+    "<interactive>";
+    "hello_tb.v";
+    "./hello.v";
