@@ -1,8 +1,8 @@
 module multiplexer_4_to_1(Y, I0, I1, I2, I3, S);
 
-input [3:0] I0, I1, I2, I3;
+input [31:0] I0, I1, I2, I3;
 input [1: 0] S;
-output reg [3:0] Y;
+output reg [31:0] Y;
 
 always @(I0 or I1 or I2 or I3 or S) begin
     case (S)

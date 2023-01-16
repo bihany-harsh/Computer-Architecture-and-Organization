@@ -1,8 +1,8 @@
 module multiplexer_4_to_1_tb;
 
-reg [3:0] I0, I1, I2, I3;
+reg [31:0] I0, I1, I2, I3;
 reg [1:0] S;
-wire [3:0] Y;
+wire [31:0] Y;
 integer i;
 
 multiplexer_4_to_1 uut (.Y(Y), .I0(I0), .I1(I1), .I2(I2), .I3(I3), .S(S));
