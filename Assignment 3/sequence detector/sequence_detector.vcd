@@ -1,0 +1,150 @@
+$date
+	Mon Feb  6 13:01:38 2023
+$end
+$version
+	Icarus Verilog
+$end
+$timescale
+	1ps
+$end
+$scope module sequence_test_bench $end
+$var wire 1 ! data_out $end
+$var reg 1 " clk $end
+$var reg 1 # data_in $end
+$var reg 1 $ rst $end
+$scope module seq $end
+$var wire 1 " clk $end
+$var wire 1 # data_in $end
+$var wire 1 $ rst $end
+$var reg 1 ! data_out $end
+$var reg 2 % ns [1:0] $end
+$var reg 2 & ps [1:0] $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+bx &
+bx %
+x$
+x#
+1"
+x!
+$end
+#5000
+1$
+0"
+#10000
+b0x %
+b0 &
+0!
+1"
+#15000
+0"
+0$
+#20000
+b1 &
+b1 %
+1"
+1#
+#25000
+0"
+#28000
+b10 %
+0#
+#30000
+b0 %
+b10 &
+1"
+#35000
+0"
+#36000
+b11 %
+1#
+#40000
+b1 %
+b11 &
+1"
+#44000
+b10 %
+1!
+0#
+#45000
+0"
+#50000
+0!
+b0 %
+b10 &
+1"
+#52000
+b11 %
+1#
+#55000
+0"
+#60000
+b0 &
+b0 %
+1"
+0#
+#65000
+0"
+#68000
+b1 %
+1#
+#70000
+b1 &
+1"
+#75000
+0"
+#80000
+1"
+#84000
+b10 %
+0#
+#85000
+0"
+#90000
+b0 %
+b10 &
+1"
+#92000
+b11 %
+1#
+#95000
+0"
+#100000
+b1 %
+b11 &
+1"
+#104000
+1!
+b10 %
+0#
+#105000
+0"
+#110000
+b0 %
+0!
+b10 &
+1"
+#112000
+b11 %
+1#
+#115000
+0"
+#120000
+b0 &
+b0 %
+1"
+0#
+#125000
+0"
+#128000
+b1 %
+1#
+#130000
+b1 &
+1"
+#135000
+0"
+#136000
