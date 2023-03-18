@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.ejs": "html",
+        "*.rmd": "markdown",
+        "stdio.h": "c"
+    }
+}
