@@ -1,75 +1,63 @@
 .data
-array: .space 40
-prompt: .asciiz "Enter a number: "
-spacee: .asciiz " "
-output: .asciiz "\n The numbers are: "
-avg: .asciiz "\n Average :"
-med: .asciiz "\n Median :"
-fp1: .float 10.0
-fp2: .float 00.0
-bucket: .space 80
-.text
 
+numbers: .word 2, 5, 6, 3, 1		#create array which holds numbers
+n:       .word 5						#number of elements in array 
+
+.text
 main:
-li $t1,10    #load 10 into $t1
-la $a1,array #load a pointer to array into $a1
+	la $s7, numbers					#load address of numbers into $s7
+
+	li $s0, 0					#initialize counter 1 for loop 1
+	lw $s6, n 					
+    addi $s6, $s6, -1				#load number of elements in array into $s6
+	
+	li $s1, 0 					#initialize counter 2 for loop 2
+
+	li $t3, 0					#initialize counter for printing
+	lw $t4, n
 
 loop:
-   addi $t1,$t1,-1 #subtract 1 from $t1 to update loop
-   li $v0,4        #print string
-   la $a0 , prompt
-   syscall        #taking input float
-   li $v0,6       
-   syscall
-   swc1 $f0,0($a1)      #storing float
-   addi $a1,$a1,4        #add 4 to $a1
-   bnez $t1,loop     #if $t1 is not zero go to loop
-   li $t1,9            # if zero load 9 into $t1
-   li $t2,9           # load 9 into $t2
-   la $a1,array     # load array pointer into $a1
+	sll $t7, $s1, 2					#multiply $s1 by 2 and put it in t7
+	add $t7, $s7, $t7 				#add the address of numbers to t7
 
-loop1:
-    beqz $t2,here    #if $t2 is zeo go to here
-    addi $t2,$t2,-1   # subtract 1 from $t2 save to $t2
-    lwc1 $f1,0($a1)      # load an input int into $t5
-    lwc1 $f2,4($a1)      #load the next into $t6
-    addi $a1,$a1,4      # add 4 to $a1 , save to $a1    
-    c.le.s $f1,$f2   #if $t5<=$t6 goto loop1  
-    bc1t loop1
-    swc1 $f1,0($a1)        #else store $t5 in $a1
-    swc1 $f2,-4($a1)      # and store $t6 in $a1 -4 (swaPPING)
-    bnez $t2,loop1       # go back to loop
+	lw $t0, 0($t7)  				#load numbers[j]	
+	lw $t1, 4($t7) 					#load numbers[j+1]
 
-here:
-    la $a1,array       # load array into $ a1
-    addi $t1,$t1,-1    # subtract 1 frpm $t1 loop counter
-    add $t2,$t2,$t1   # add $t2 to $t1 save to $t2
-    bnez $t1,loop1     #if t1 is not zero goto loop1
-    li $v0,4            #print string
-    la $a0,output      
-    syscall         #displaying message
-    la $a1, array     
-    li $t1, 10
+	slt $t2, $t0, $t1				#if t0 < t1
+	bne $t2, $zero, increment
 
-loop2:
-    li $v0,2      # print float
-    lwc1 $f12,0($a1)
-    syscall
-    li $v0,4
-    la $a0,spacee
-    syscall
-    addi $a1,$a1,4    # array shift
-    addi $t1,$t1,-1   # loop counter
-    bnez $t1,loop2
+	sw $t1, 0($t7) 					#swap
+	sw $t0, 4($t7)
 
+increment:	
+
+	addi $s1, $s1, 1				#increment t1
+	sub $s5, $s6, $s0 				#subtract s0 from s6
+
+	bne  $s1, $s5, loop				#if s1 (counter for second loop) does not equal 9, loop
+	addi $s0, $s0, 1 				#otherwise add 1 to s0
+	li $s1, 0 					#reset s1 to 0
+
+	bne  $s0, $s6, loop				# go back through loop with s1 = s1 + 1
+	
 print:
-    li$v0,4
-    la $a0,spacee
-    syscall
-    li $v0,4
-    syscall
-    move $a0,$t7
-    li $v0,1
-    syscall
-li $v0,10
-syscall
+	beq $t3, $t4, final				#if t3 = t4 go to final
+	
+	lw $t5, 0($s7)					#load from numbers
+	
+	li $v0, 1					#print the number
+	move $a0, $t5
+	syscall
+
+	li $a0, 32					#print space
+	li $v0, 11
+	syscall
+	
+	addi $s7, $s7, 4				#increment through the numbers
+	addi $t3, $t3, 1				#increment counter
+
+	j print
+
+final:	
+	li $v0, 10					#end program
+	syscall

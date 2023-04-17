@@ -14,7 +14,7 @@ initial begin
     for (i = 0; i < INSTRUCTION_MEM_SIZE; i = i + 1) begin
         instructionMemory[i] = 32'b11111100000000000000000000000000;
     end
-    $readmemb("instructions.mem", instructionMemory);
+    $readmemb("instructions_storage.mem", instructionMemory);
 
     instruction = 32'b11111100000000000000000000000000;
 end
